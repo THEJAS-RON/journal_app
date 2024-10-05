@@ -1,0 +1,28 @@
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
+  <h1 class="text-2xl font-bold mb-4">New Journal Entry</h1>
+
+  <%= form_with model: @journal, local: true do |form| %>
+    <div class="flex flex-col mb-4">
+      <%= form.label :title, class: "block text-sm font-medium" %>
+      <%= form.text_field :title, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
+    </div>
+    <div class="flex flex-col mb-4">
+      <%= form.label :content, class: "block text-sm font-medium" %>
+      <%= form.text_area :content, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm", rows: 5 %>
+    </div>
+    <div class="mb-4">
+      <%= form.label :attachment, class: "block text-sm font-medium" %>
+      <%= form.file_field :attachment, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
+    </div>
+    <div>
+      <%= form.submit "Create Journal", class: "mt-2 border border-black bg-black text-white rounded-md py-3 px-6 hover:bg-gray-700" %>
+    </div>
+  <% end %>
+</div>
+
+
+
+
+
+
+<%= link_to "Back", journals_path, class: "mt-4 inline-block text-gray-600 hover:underline" %>

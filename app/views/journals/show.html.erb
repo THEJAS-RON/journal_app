@@ -1,0 +1,36 @@
+<div class="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md mt-10">
+  <h1 class="text-3xl font-bold text-gray-900 mb-4"><%= @journal.title %></h1>
+  <p class="text-gray-700 mb-6"><%= @journal.content %></p>
+
+  <div class="flex space-x-2 mb-4">
+    <%= link_to "Edit", edit_journal_path(@journal), class: "bg-yellow-500 text-white rounded-md px-4 py-2 hover:bg-yellow-600 transition duration-300" %>
+    <%= link_to "Back", journals_path, class: "ml-2 border border-gray-300 rounded-md py-2 px-4 hover:bg-gray-200 transition duration-300" %>
+  </div>
+
+  <% if @journal.attachment.present? %>
+    <div class="mt-4">
+      <h2 class="text-lg font-semibold">Attached File:</h2>
+      <%= link_to @journal.attachment.filename.to_s, rails_blob_path(@journal.attachment, disposition: "attachment"), class: "text-blue-600 hover:underline" %>
+    </div>
+  <% end %>
+
+  <% if @journal.public_link.present? %>
+    <div class="mt-6">
+      <label class="block text-sm font-medium text-gray-700">Public Link:</label>
+      <div class="flex items-center mt-2">
+        <input type="text" id="publicLink" value="<%= public_journal_url(public_link: @journal.public_link) %>" readonly class="w-full p-2 border rounded-md">
+        <button id="copyBtn" class="ml-2 bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 transition duration-300">Copy</button>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- Copy-to-Clipboard Script -->
+  <script>
+    document.getElementById("copyBtn").addEventListener("click", function() {
+      var copyText = document.getElementById("publicLink");
+      copyText.select();
+      document.execCommand("copy");
+      alert("Copied the link: " + copyText.value);
+    });
+  </script>
+</div>

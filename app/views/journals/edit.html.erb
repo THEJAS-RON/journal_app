@@ -1,0 +1,34 @@
+<div class="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md mt-10">
+  <h1 class="text-3xl font-bold text-gray-900 mb-6 text-center">Edit Journal Entry</h1>
+
+  <%= form_with model: @journal, local: true do |form| %>
+    <div class="mb-6">
+      <%= form.label :title, class: "block text-sm font-medium text-gray-700" %>
+      <%= form.text_field :title, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2" %>
+    </div>
+
+    <div class="mb-6">
+      <%= form.label :content, class: "block text-sm font-medium text-gray-700" %>
+      <%= form.text_area :content, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2", rows: 5 %>
+    </div>
+
+    <div class="mb-6">
+      <%= form.label :attachment, class: "block text-sm font-medium text-gray-700" %>
+      <%= form.file_field :attachment, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm" %>
+      <% if @journal.attachment.attached? %>
+        <div class="mt-2">
+          <h3 class="text-sm font-medium text-gray-700">Current Attachment:</h3>
+          <%= link_to @journal.attachment.filename.to_s, rails_blob_path(@journal.attachment, disposition: "attachment"), class: "text-blue-600 hover:underline" %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="flex justify-end">
+      <%= form.submit "Update Journal", class: "bg-blue-500 text-white font-semibold rounded-md px-6 py-2 hover:bg-blue-600 transition duration-300" %>
+    </div>
+  <% end %>
+
+  <div class="flex justify-center">
+    <%= link_to "Cancel", @journal, class: "mt-4 inline-block text-gray-600 hover:underline hover:text-blue-500 transition duration-200" %>
+  </div>
+</div>
