@@ -8,7 +8,7 @@ gem 'devise', '~> 4.9', '>= 4.9.3'
 gem "sprockets-rails"
 
 group :development, :test do
-  gem 'sqlite3', '~> 1.4'  # SQLite for development and testing
+  gem 'sqlite3', '~> 2.1'  # SQLite for development and testing
 end
 
 group :production do
